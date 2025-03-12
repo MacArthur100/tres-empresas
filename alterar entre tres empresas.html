@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            margin-top: 10px;
+            display: none; /* Ocultar imagens inicialmente */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Selecione uma empresa</h1>
+
+    <button onclick="exibirEmpresa('A')">Empresa A</button>
+    <button onclick="exibirEmpresa('B')">Empresa B</button>
+    <button onclick="exibirEmpresa('C')">Empresa C</button>
+
+    <div id="info"></div>
+
+    <h2>Visualizar Funcionários</h2>
+    <button onclick="exibirImagem('rh')">Funcionários RH</button>
+    <button onclick="exibirImagem('gerentes')">Gerentes de Produtos</button>
+
+    <img id="imagem" src="" alt="Imagem dos funcionários">
+
+    <script>
+        // Dados das empresas
+        const empresas = {
+            A: {
+                nome: "Empresa A",
+                funcionarios: 200,
+                rh: 20,
+                gerentes: 15,
+                telefone: "(11) 1234-5678",
+                endereco: "Rua Exemplo, 123 - São Paulo"
+            },
+            B: {
+                nome: "Empresa B",
+                funcionarios: 350,
+                rh: 30,
+                gerentes: 20,
+                telefone: "(21) 8765-4321",
+                endereco: "Av. Business, 456 - Rio de Janeiro"
+            },
+            C: {
+                nome: "Empresa C",
+                funcionarios: 150,
+                rh: 10,
+                gerentes: 8,
+                telefone: "(31) 1111-2222",
+                endereco: "Rua Comércio, 789 - Belo Horizonte"
+            }
+        };
+
+        let empresaAtual = 'A'; // Define a empresa inicial
+
+        function exibirEmpresa(empresa) {
+            empresaAtual = empresa;
+            const dados = empresas[empresa];
+
+            document.getElementById("info").innerHTML = `
+                <h2>${dados.nome}</h2>
+                <p>A empresa possui ${dados.funcionarios} funcionários.</p>
+                <p>${dados.rh} trabalham no RH e ${dados.gerentes} no gerenciamento de produtos.</p>
+                <p><strong>Fale com a gente:</strong> ${dados.telefone}</p>
+                <p><strong>Endereço:</strong> ${dados.endereco}</p>
+            `;
+
+            document.getElementById("imagem").style.display = "none"; // Ocultar imagem ao trocar de empresa
+        }
+
+        function exibirImagem(tipo) {
+            const imagens = {
+                A: {
+                    rh: "https://via.placeholder.com/300x200?text=RH+Empresa+A",
+                    gerentes: "https://via.placeholder.com/300x200?text=Gerentes+Empresa+A"
+                },
+                B: {
+                    rh: "https://via.placeholder.com/300x200?text=RH+Empresa+B",
+                    gerentes: "https://via.placeholder.com/300x200?text=Gerentes+Empresa+B"
+                },
+                C: {
+                    rh: "https://via.placeholder.com/300x200?text=RH+Empresa+C",
+                    gerentes: "https://via.placeholder.com/300x200?text=Gerentes+Empresa+C"
+                }
+            };
+
+            document.getElementById("imagem").src = imagens[empresaAtual][tipo];
+            document.getElementById("imagem").style.display = "block";
+        }
+
+        // Exibir a primeira empresa por padrão
+        exibirEmpresa('A');
+    </script>
+
+</body>
+</html>
